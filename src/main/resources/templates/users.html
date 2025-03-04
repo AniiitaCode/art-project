@@ -37,8 +37,8 @@
                     <td th:text="${#strings.isEmpty(currentUser.email) ? 'no email' : currentUser.email}"></td>
                     <td th:text="${#strings.capitalize(#strings.toLowerCase(currentUser.role.name()))}"></td>
                     <td>
-                        <p class="status active">Active</p>
-                        <p class="status terminated">Inactive</p>
+                        <p th:unless="${currentUser.getDesigns().isEmpty()}" class="status active">Active</p>
+                        <p th:if="${currentUser.getDesigns().isEmpty()}" class="status terminated">Inactive</p>
                     </td>
                     <td th:text="${#temporals.format(currentUser.createdOn, 'dd MMM YYYY HH:mm')}"></td>
 
