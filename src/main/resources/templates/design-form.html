@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/design-form.css">
+    <title>Design Form</title>
+</head>
+<body>
+
+<main>
+    <section class="section full-height">
+
+        <div class="container">
+            <a th:href="@{/designs/nextPage}" class="logo-big">
+                <img th:src="@{/images/design-form.jpg}" alt="Design Form Page">
+            </a>
+        </div>
+
+        <form class="form"
+              th:action="@{/designs/nextPage}"
+              th:method="POST"
+              th:object="${designFormRequest}">
+
+            <h3>SELECT FORM</h3>
+
+            <label for="form">Form</label>
+            <select id="form" th:field="*{form}">
+                <option value="" selected>Select</option>
+                <option th:each="form : ${T(com.example.art.design.model.FormDesign).values()}" th:value="${form}" th:text="${form}"></option>
+            </select>
+                <p class="alert-warning" th:if="${#fields.hasErrors('form')}" th:errors="*{form}"></p>
+
+            <label for="construction">Construction</label>
+            <select id="construction" th:field="*{construction}">
+                <option value="" selected>Select</option>
+                <option th:each="construction : ${T(com.example.art.design.model.ConstructionDesign).values()}" th:value="${construction}" th:text="${construction}"></option>
+            </select>
+                <p class="alert-warning" th:if="${#fields.hasErrors('construction')}" th:errors="*{construction}"></p>
+
+            <a th:href="@{/designs/forms}" class="btn btn-primary">Show Form</a>
+            <button type="submit">Next Step</button>
+
+        </form>
+
+    </section>
+</main>
+<div class="footer"><p>© 2025 Nails Art. All rights reserved.</p></div>
+</body>
+</html>

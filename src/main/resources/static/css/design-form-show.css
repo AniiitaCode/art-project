@@ -1,0 +1,52 @@
+body {
+    background-color: papayawhip;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+}
+
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+
+.logo-container img {
+    width: 110%;
+    max-width: 500px;
+    object-fit: contain;
+}
+
+
+main {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px;
+    align-items: flex-end;
+}
+
+
+.footer {
+    text-align: left;
+    padding: 2px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 21%;
+    bottom: 0;
+    font-weight: bold;
+}
+
+
+
+
+
+

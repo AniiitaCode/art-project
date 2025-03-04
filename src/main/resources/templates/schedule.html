@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/schedule.css">
+    <title>Schedule</title>
+</head>
+<body>
+<main role="main" class="bg-secondary">
+
+    <div class="jumbotron text-center">
+        <div class="container text-light text-center">
+            <h1 class="display-3"><strong class="bg-blur rounded">My Schedule</strong></h1>
+        </div>
+
+        <div class="row mt-3 mb-3 ">
+            <div class="col-5 bg-blur rounded m-auto pb-3">
+                <h3 class="mySticky bg-gray text-light rounded">All orders: <span th:text="${allOrders.size()}"></span></h3>
+                <div th:each="order : ${allOrders}" class="mt-3 rounded badge-info p-3">
+                    <img class="mr-2" th:src="@{/images/profile-schedule.png}" alt="Profile Schedule"
+                         width="50px" height="50px">
+                    <p></p>
+                    <span class="p-3">Order ID: <span th:text="${order.getId()}"></span></span>
+                    <p></p>
+                    <span class="p-3">Saved date: <span th:text="${#temporals.format(order.savedDate, 'dd-MM-YYYY')}"></span></span>
+                    <p></p>
+                    <span class="p-3">Saved hour: <span th:text="${order.savedHour}"></span></span>
+                    <form th:action="@{'/schedule/' + ${order.id} + '/confirm'}" th:method="POST">
+                    <button type="submit" th:if="${!order.isAccept()}" class="accept-button">Accept</button>
+                    </form>
+                    <form th:action="@{'/schedule/' + ${order.id}}" th:method="DELETE">
+                        <button type="submit" th:if="${!order.isAccept()}" class="not-accept-button">Not Accept</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+<div class="footer"><p>© 2025 Nails Art. All rights reserved.</p></div>
+</body>
+</html>

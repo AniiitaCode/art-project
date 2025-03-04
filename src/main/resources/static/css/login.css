@@ -1,0 +1,129 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background-color: cadetblue;
+}
+
+
+.section.full-height {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150vw;
+    height: 90vh;
+    background: url('static/images/login-page.jpg') right top;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+
+
+.container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.form {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px darkred;
+    color: white;
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    top: 23%;
+    left: 21%;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+
+
+.form h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+
+.alert-warning {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+
+.form-already {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.form-already a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+.form-already a:hover {
+    text-decoration: underline;
+}
+
+
+.footer {
+    text-align: left;
+    padding: 9px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 23%;
+    bottom: 0;
+    font-weight: bold;
+}
+

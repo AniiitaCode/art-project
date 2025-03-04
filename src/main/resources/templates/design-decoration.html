@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/design-decoration.css">
+    <title>Design Decoration</title>
+</head>
+<body>
+
+<main>
+    <section class="section full-height">
+
+        <div class="container">
+            <a th:href="@{/designs/decoration}" class="logo-big">
+                <img th:src="@{/images/design-colors.png}" alt="Design Decoration Page">
+            </a>
+        </div>
+
+        <form class="form"
+              th:action="@{/designs/decoration}"
+              th:method="POST"
+              th:object="${designDecorationRequest}">
+
+
+            <h3>SELECT</h3>
+            <label for="color">Color number</label>
+            <input
+                    type="text"
+                    placeholder="Color"
+                    id="color"
+                    th:field="*{color}"
+            >
+            <p class="alert-warning" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p>
+
+            <label for="pebbles">Pebbles</label>
+            <select id="pebbles" th:field="*{pebbles}">
+                <option value="" selected>Select pebbles</option>
+                <option th:each="pebble : ${T(com.example.art.design.model.DecorationPebbles).values()}"
+                        th:value="${pebble.name()}"
+                        th:text="${pebble.getImageName()}">
+                </option>
+            </select>
+
+
+            <div class="image-button-container">
+                <button class="image-button">Show pebbles</button>
+
+                <div class="image-list">
+                <ul>
+                    <li th:each="pebble : ${T(com.example.art.design.model.DecorationPebbles).values()}">
+                        <span th:text="${pebble.getImageName()}"></span>
+                        <img th:src="@{${pebble.getImagePath()}}" alt="Image" style="width: 100px; height: 100px;" />
+                    </li>
+                </ul>
+                </div>
+            </div>
+            <p class="alert-warning" th:if="${#fields.hasErrors('pebbles')}" th:errors="*{pebbles}"></p>
+
+            <p></p>
+            <label for="picture">Picture</label>
+            <select id="picture" th:field="*{picture}">
+                <option value="" selected>Select picture</option>
+                <option th:each="picture : ${T(com.example.art.design.model.DecorationPicture).values()}"
+                        th:value="${picture.name()}"
+                        th:text="${picture.getImageName()}">
+                </option>
+            </select>
+
+            <div class="image-button-container">
+                <button class="image-button">Show pictures</button>
+
+                <div class="image-list">
+                    <ul>
+                        <li th:each="picture : ${T(com.example.art.design.model.DecorationPicture).values()}">
+                            <span th:text="${picture.getImageName()}"></span>
+                            <img th:src="@{${picture.getImagePath()}}" alt="Image" style="width: 100px; height: 100px;" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="alert-warning" th:if="${#fields.hasErrors('picture')}" th:errors="*{picture}"></p>
+            <p></p>
+            <button type="submit">Next Step</button>
+        </form>
+
+    </section>
+</main>
+<div class="footer"><p>© 2025 Nails Art. All rights reserved.</p></div>
+</body>
+</html>

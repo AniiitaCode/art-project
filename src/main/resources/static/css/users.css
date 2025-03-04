@@ -1,0 +1,75 @@
+
+body {
+    background-color: #000000;
+    color: deeppink;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.styled-table {
+    width: 80%;
+    margin: 50px auto;
+    border-collapse: collapse;
+    background-color: #f1c6d9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.styled-table th {
+    background-color: #f8a1c2;
+    color: black;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /
+}
+
+
+.styled-table tr:hover {
+    background-color: #f1a1c7;
+}
+
+
+.status {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+
+.status.active {
+    background-color: #4caf50;
+    color: white;
+}
+
+.status.terminated {
+    background-color: #f44336;
+    color: white;
+}
+
+.footer {
+    position: fixed;
+    bottom: 1px;
+    left: 1px;
+    color: white;
+    padding: 1px 4px;
+    border-radius: 3px;
+    z-index: 1000;
+    font-weight: bold;
+}

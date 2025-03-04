@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <title>Orders</title>
+</head>
+<body>
+
+<main>
+
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/orders}"
+          th:object="${design}"
+    >
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Order</span></h1>
+                <hr class="hr-3 w-25 bg-white"/>
+                <label for="design" id="design"  class="h4 mb-2">Design</label>
+            </div>
+            <div>
+                <p><strong>Form: </strong> <span th:text="${design.form}"></span></p>
+                <p><strong>Construction: </strong> <span th:text="${design.construction}"></span></p>
+                <p><strong>Color: </strong> <span th:text="${design.color}"></span></p>
+                <p><strong>Pebbles:   </strong> <img th:src="@{${design.pebbles.getImagePath()}}" alt="Pebbles" width="80"/></p>
+                <p><strong>Picture:   </strong> <img th:src="@{${design.picture.getImagePath()}}" alt="Picture" width="80"/></p>
+            </div>
+        </div>
+    </form>
+        <form class="mx-auto w-25 bg-blur rounded"
+              th:method="POST"
+              th:action="@{/orders}"
+              th:object="${orderRequest}"
+        >
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="savedDate" class="h4 mb-2">Set date</label>
+                </div>
+                <input
+                        type="date"
+                        class="form-control"
+                        id="savedDate"
+                        name="savedDate"
+                        th:field="*{savedDate}"
+                        th:errorclass="'is-invalid alert-danger'"
+                />
+                <small th:if="${#fields.hasErrors('savedDate')}" th:errors="*{savedDate}" class="invalid-feedback text-danger">Input Date error message</small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="savedHour" class="h4 mb-2">Set time</label>
+                </div>
+                <input
+                        type="time"
+                        class="form-control"
+                        id="savedHour"
+                        name="savedHour"
+                        th:field="*{savedHour}"
+                th:errorclass="'is-invalid alert-danger'"
+                />
+                <small th:if="${#fields.hasErrors('savedHour')}" th:errors="*{savedHour}" class="invalid-feedback text-danger"></small>
+            </div>
+
+            <p></p>
+            <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3" value="Order">ORDER</button>
+        </div>
+
+    </form>
+</main>
+<div class="footer"><p3>© 2025 Nails Art. All rights reserved.</p3></div>
+</body>
+</html>

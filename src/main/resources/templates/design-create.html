@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/design-create.css">
+    <title>Design create</title>
+</head>
+<body>
+<header class="header">
+    <a th:href="@{/designs/nextPage}" class="btn btn-primary">Next</a>
+</header>
+<main>
+    <div class="logo-container">
+        <a>
+            <img th:src="@{/images/design-create.png}" alt="Design Image">
+        </a>
+    </div>
+
+    <main>
+        <div>
+            <div class="welcome section">
+                <h1>Welcome <span th:text="${user.firstName}"></span></h1>
+                <p class="intro-text">
+                    This will become your favorite site!
+                    We offer you the opportunity to create your own manicure model by choosing the shape,
+                    build, color, and decoration, and then book an appointment with us!
+                    If we are able to meet your expectations,
+                    we will approve the details you have saved
+                    and we will meet you on the specified day and time!
+                    We look forward to seeing you!
+            </div>
+        </div>
+    </main>
+</main>
+<div class="footer"><p>© 2025 Nails Art. All rights reserved.</p></div>
+</body></html>
