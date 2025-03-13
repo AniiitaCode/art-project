@@ -1,5 +1,6 @@
 package com.example.art.user.service;
 
+import com.example.art.email.service.EmailService;
 import com.example.art.exception.DomainException;
 import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
@@ -24,11 +25,14 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public UserService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       EmailService emailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     public void register(RegisterRequest registerRequest) {
@@ -54,6 +58,9 @@ public class UserService implements UserDetailsService {
         }
 
         userRepository.save(user);
+        emailService.savePreference(user.getId(), true, user.getEmail());
+        emailService.sendEmail(user.getId(), "Welcome", "Dear %s, welcome to our website!"
+                .formatted(user.getFirstName()));
     }
 
     public User getById(UUID userId) {
