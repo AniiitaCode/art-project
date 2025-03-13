@@ -39,6 +39,9 @@
                         <a th:if="${user.role.name() == 'ADMIN'}" th:href="@{/users}" class="profile-actions-button">
                             <button>Users</button>
                         </a>
+                        <a th:if="${user.role.name() == 'USER'}" th:href="@{/emails}" class="profile-actions-button">
+                            <button>Notifications</button>
+                        </a>
                         <a th:if="${user}" th:href="@{/logout}" class="profile-actions-button">
                             <button>Logout</button>
                         </a>
