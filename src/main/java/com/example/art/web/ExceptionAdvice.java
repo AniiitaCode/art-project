@@ -1,10 +1,12 @@
 package com.example.art.web;
 
+import com.example.art.exception.UsernameAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ControllerAdvice
 public class ExceptionAdvice {
@@ -17,5 +19,14 @@ public class ExceptionAdvice {
         modelAndView.setViewName("server-error");
 
         return modelAndView;
+    }
+
+    @ExceptionHandler(UsernameAlreadyExistException.class)
+    public String handleUsernameAlreadyExist(RedirectAttributes redirectAttributes,
+                                             UsernameAlreadyExistException exception) {
+
+        String message = exception.getMessage();
+        redirectAttributes.addFlashAttribute("usernameAlreadyExistMessage", message);
+        return "redirect:/register";
     }
 }

@@ -2,6 +2,7 @@ package com.example.art.user.service;
 
 import com.example.art.email.service.EmailService;
 import com.example.art.exception.DomainException;
+import com.example.art.exception.UsernameAlreadyExistException;
 import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
 import com.example.art.user.model.UserRole;
@@ -40,7 +41,7 @@ public class UserService implements UserDetailsService {
                 userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
 
         if (optionalUser.isPresent()) {
-            throw new DomainException("This username or email already exist.");
+            throw new UsernameAlreadyExistException("This username or email already exist.");
         }
 
             User user = User.builder()
