@@ -7,6 +7,7 @@ import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
 import com.example.art.user.model.UserRole;
 import com.example.art.user.repository.UserRepository;
+import com.example.art.wallet.service.WalletService;
 import com.example.art.web.dto.RegisterRequest;
 import com.example.art.web.dto.UserEditRequest;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,13 +28,16 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final WalletService walletService;
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       EmailService emailService) {
+                       EmailService emailService,
+                       WalletService walletService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.walletService = walletService;
     }
 
     public void register(RegisterRequest registerRequest) {
@@ -59,6 +63,7 @@ public class UserService implements UserDetailsService {
         }
 
         userRepository.save(user);
+        walletService.createWallet(user);
         emailService.savePreference(user.getId(), true, user.getEmail());
         emailService.sendEmail(user.getId(), "Welcome", "Dear %s, welcome to our website!"
                 .formatted(user.getFirstName()));
@@ -87,7 +92,7 @@ public class UserService implements UserDetailsService {
         User userToUpdate = getById(id);
 
         if (userToUpdate == null) {
-            throw new DomainException("User not found!");
+            throw new NullPointerException("User not found!");
         }
 
         if (userToUpdate.getRole() == UserRole.ADMIN) {
@@ -102,7 +107,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new DomainException("Username does not exist!"));
+                .orElseThrow(() -> new UsernameNotFoundException("Username does not exist!"));
 
         return new AuthenticationDetails(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
     }
