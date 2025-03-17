@@ -1,17 +1,15 @@
 package com.example.art.order.service;
 
-import com.example.art.design.model.Design;
+import com.example.art.design.model.*;
 import com.example.art.exception.DomainException;
 import com.example.art.order.model.Orders;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.web.dto.OrderRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -23,7 +21,8 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public void saveOrder(OrderRequest orderRequest, Design design) {
+    public void saveOrder(OrderRequest orderRequest,
+                          Design design) {
 
         LocalTime startTime = LocalTime.of(10, 0);
         LocalTime endTime = LocalTime.of(18, 0);
@@ -61,6 +60,36 @@ public class OrderService {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new DomainException("Order with id [%s] does not exist."
                         .formatted(orderId)));
+    }
+
+    public LinkedHashMap<String, BigDecimal> createBill(Design design) {
+        LinkedHashMap<String, BigDecimal> bill = new LinkedHashMap<>();
+        BigDecimal totalPrice = new BigDecimal("0.00");
+
+        ConstructionDesign constructionDesign = design.getConstruction();
+        DecorationPebbles pebbles = design.getPebbles();
+        DecorationPicture picture = design.getPicture();
+
+        bill.put("GelPolish", new BigDecimal("20.00"));
+        totalPrice = totalPrice.add(new BigDecimal("20.00"));
+
+        if (constructionDesign.equals(ConstructionDesign.YES)) {
+            bill.put("Construction", new BigDecimal("20.00"));
+            totalPrice = totalPrice.add(new BigDecimal("20.00"));
+        }
+
+        if (!pebbles.equals(DecorationPebbles.NONE)) {
+            bill.put("Pebbles", new BigDecimal("6.00"));
+            totalPrice = totalPrice.add(new BigDecimal("6.00"));
+        }
+
+        if (!picture.equals(DecorationPicture.NONE)) {
+            bill.put("Picture", new BigDecimal("7.00"));
+            totalPrice = totalPrice.add(new BigDecimal("7.00"));
+        }
+
+        bill.put("TotalPrice", totalPrice);
+        return bill;
     }
 }
 

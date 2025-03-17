@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -37,11 +40,14 @@ public class OrderController {
         User user = userService.getById(authenticationDetails.getUserId());
         Design design = designService.getLastDesign(user.getId());
 
+        LinkedHashMap<String, BigDecimal> bill = orderService.createBill(design);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("order");
         modelAndView.addObject("user", user);
         modelAndView.addObject("design", design);
         modelAndView.addObject("orderRequest", new OrderRequest());
+        modelAndView.addObject("bill", bill);
 
         return modelAndView;
     }

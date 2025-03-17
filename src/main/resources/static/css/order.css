@@ -1,6 +1,6 @@
 
 body {
-    background-color: black;
+    background-image: linear-gradient(to right, purple, pink);
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
     display: flex;
@@ -8,7 +8,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    padding-top: 80px;
+    padding-top: 300px;
 }
 
 
