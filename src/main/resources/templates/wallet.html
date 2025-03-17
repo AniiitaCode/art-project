@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/wallet.css">
+    <title>Wallet</title>
+</head>
+<body>
+
+<main>
+
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="POST"
+          th:action="@{/wallets}"
+          th:object="${wallet}"
+    >
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Wallet</span></h1>
+                <hr class="hr-3 w-25 bg-white"/>
+            </div>
+            <div>
+                <p><strong>User:&nbsp;</strong> <span th:text="${wallet.owner.firstName}"></span></p>
+                <p><strong>Balance:&nbsp; </strong> <span th:text="${wallet.getBalance()}"></span></p>
+                <p><strong>Currency:&nbsp;</strong> <span th:text="${wallet.currency}"></span></p>
+                <p><strong>Created date:&nbsp;</strong>
+                    <span th:text="${#temporals.format(wallet.createdOn, 'dd-MM-YYYY HH:mm')}"></span></p>
+            </div>
+        </div>
+    </form>
+</main>
+<div class="footer"><p3>© 2025 Nails Art. All rights reserved.</p3></div>
+</body>
+</html>

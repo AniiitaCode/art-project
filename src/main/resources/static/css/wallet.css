@@ -1,0 +1,102 @@
+body {
+    background-image: linear-gradient(to right, deeppink, lightpink);
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding-top: 0;
+}
+
+
+form {
+    background-color: grey;
+    padding: 55px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 25px 15px rgba(255, 255, 255, 1);
+    width: 100%;
+    max-width: 800px;
+}
+
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 45px;
+    color: deeppink;
+    margin-bottom: 20px;
+}
+
+h1 .badge {
+    background-color: pink;
+}
+
+
+label {
+    font-size: 18px;
+    color: deeppink;
+    font-weight: bold;
+}
+
+
+input[type="date"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #e1a7d7;
+    background-color: #ffffff;
+    color: #2e2e2e;
+}
+
+
+input.is-invalid, textarea.is-invalid {
+    border-color: #e74c3c;
+    background-color: #f8d7da;
+}
+
+
+.invalid-feedback {
+    font-size: 14px;
+    color: #e74c3c;
+}
+
+
+button[type="submit"] {
+    background-color: lightpink;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: deeppink;
+}
+
+
+p {
+    font-size: 16px;
+    color: darkblue;
+}
+
+
+hr {
+    border: 1px solid #fff;
+    margin-bottom: 30px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 1px;
+    left: 1px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}

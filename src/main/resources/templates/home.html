@@ -42,6 +42,9 @@
                         <a th:if="${user.role.name() == 'USER'}" th:href="@{/emails}" class="profile-actions-button">
                             <button>Notifications</button>
                         </a>
+                        <a th:if="${user.role.name() == 'USER'}" th:href="@{/wallets}" class="profile-actions-button">
+                            <button>Wallet</button>
+                        </a>
                         <a th:if="${user}" th:href="@{/logout}" class="profile-actions-button">
                             <button>Logout</button>
                         </a>
