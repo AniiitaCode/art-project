@@ -2,6 +2,7 @@ package com.example.art.user.model;
 
 import com.example.art.design.model.Design;
 import com.example.art.history.model.History;
+import com.example.art.wallet.model.Wallet;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,6 +43,9 @@ public class User {
     private String password;
 
     private LocalDateTime updatedOn;
+
+    @OneToOne
+    private Wallet wallet;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<History> histories;
