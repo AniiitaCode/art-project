@@ -21,7 +21,7 @@ public class History {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate addedOn;
 
     @OneToMany(mappedBy = "history", fetch = FetchType.EAGER)
