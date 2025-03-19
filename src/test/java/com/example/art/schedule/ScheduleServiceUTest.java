@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.schedule;
 
 import com.example.art.order.model.Orders;
 import com.example.art.order.repository.OrderRepository;

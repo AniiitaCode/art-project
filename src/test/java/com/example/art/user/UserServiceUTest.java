@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.user;
 
 import com.example.art.email.service.EmailService;
 import com.example.art.exception.DomainException;

@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.wallet;
 
 import com.example.art.user.model.User;
 import com.example.art.wallet.model.Wallet;

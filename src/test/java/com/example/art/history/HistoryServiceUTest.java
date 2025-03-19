@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.history;
 
 import com.example.art.design.model.Design;
 import com.example.art.history.model.History;

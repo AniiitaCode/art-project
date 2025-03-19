@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.design;
 
 import com.example.art.design.model.*;
 import com.example.art.design.repository.DesignRepository;

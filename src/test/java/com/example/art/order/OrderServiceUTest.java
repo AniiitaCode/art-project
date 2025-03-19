@@ -1,4 +1,4 @@
-package com.example.art;
+package com.example.art.order;
 
 import com.example.art.design.model.ConstructionDesign;
 import com.example.art.design.model.DecorationPebbles;
