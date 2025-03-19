@@ -92,7 +92,7 @@ public class UserService implements UserDetailsService {
         User userToUpdate = getById(id);
 
         if (userToUpdate == null) {
-            throw new NullPointerException("User not found!");
+            throw new DomainException("User with id [%s] does not exist.".formatted(id));
         }
 
         if (userToUpdate.getRole() == UserRole.ADMIN) {
