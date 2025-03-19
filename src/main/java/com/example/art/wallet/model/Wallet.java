@@ -29,6 +29,6 @@ public class Wallet {
     @Column(nullable = false)
     private LocalDateTime createdOn;
 
-    @ManyToOne
+    @OneToOne
     private User owner;
 }
