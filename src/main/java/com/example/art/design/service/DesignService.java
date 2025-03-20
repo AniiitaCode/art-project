@@ -2,7 +2,6 @@ package com.example.art.design.service;
 
 import com.example.art.design.model.Design;
 import com.example.art.design.repository.DesignRepository;
-import com.example.art.history.service.HistoryService;
 import com.example.art.user.model.User;
 import com.example.art.web.dto.DesignDecorationRequest;
 import com.example.art.web.dto.DesignFormRequest;
@@ -18,12 +17,9 @@ public class DesignService {
     @Getter
     private DesignFormRequest savedForm;
     private final DesignRepository designRepository;
-    private final HistoryService historyService;
 
-    public DesignService(DesignRepository designRepository,
-                         HistoryService historyService) {
+    public DesignService(DesignRepository designRepository) {
         this.designRepository = designRepository;
-        this.historyService = historyService;
     }
 
     public DesignFormRequest saveForm(DesignFormRequest designFormRequest) {
@@ -53,8 +49,6 @@ public class DesignService {
                .user(user)
                .build();
 
-
-       historyService.saveInHistory(design);
        designRepository.save(design);
    }
 

@@ -2,6 +2,7 @@ package com.example.art.order.service;
 
 import com.example.art.design.model.*;
 import com.example.art.exception.DomainException;
+import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.web.dto.OrderRequest;
@@ -16,9 +17,12 @@ import java.util.*;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final HistoryService historyService;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository,
+                        HistoryService historyService) {
         this.orderRepository = orderRepository;
+        this.historyService = historyService;
     }
 
     public void saveOrder(OrderRequest orderRequest,
@@ -44,6 +48,7 @@ public class OrderService {
                 .design(design)
                 .build();
 
+        historyService.saveInHistory(orders);
         orderRepository.save(orders);
     }
 

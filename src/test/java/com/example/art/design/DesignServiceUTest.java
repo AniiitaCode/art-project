@@ -3,7 +3,6 @@ package com.example.art.design;
 import com.example.art.design.model.*;
 import com.example.art.design.repository.DesignRepository;
 import com.example.art.design.service.DesignService;
-import com.example.art.history.service.HistoryService;
 import com.example.art.user.model.User;
 import com.example.art.web.dto.DesignDecorationRequest;
 import com.example.art.web.dto.DesignFormRequest;
@@ -25,9 +24,6 @@ public class DesignServiceUTest {
 
     @Mock
     private DesignRepository designRepository;
-
-    @Mock
-    private HistoryService historyService;
 
     @Captor
     private ArgumentCaptor<Design> designCaptor;
@@ -116,7 +112,6 @@ public class DesignServiceUTest {
 
         designService.saveAllInformationDesign(dtoForm, dtoDecoration, user);
 
-        verify(historyService, times(1)).saveInHistory(designCaptor.capture());
         verify(designRepository, times(1)).save(designCaptor.capture());
 
         Design capturedDesign = designCaptor.getValue();

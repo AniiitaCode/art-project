@@ -1,6 +1,5 @@
 package com.example.art.design.model;
 
-import com.example.art.history.model.History;
 import com.example.art.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,7 +42,4 @@ public class Design {
 
     @ManyToOne
     private User user;
-
-    @ManyToOne
-    private History history;
 }

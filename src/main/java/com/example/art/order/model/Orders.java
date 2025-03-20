@@ -1,6 +1,7 @@
 package com.example.art.order.model;
 
 import com.example.art.design.model.Design;
+import com.example.art.history.model.History;
 import com.example.art.schedule.model.Schedule;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,4 +35,7 @@ public class Orders {
 
     @ManyToOne
     private Schedule schedule;
+
+    @ManyToOne
+    private History history;
 }

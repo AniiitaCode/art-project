@@ -1,10 +1,9 @@
 package com.example.art.history;
 
-import com.example.art.design.model.Design;
 import com.example.art.history.model.History;
 import com.example.art.history.repository.HistoryRepository;
 import com.example.art.history.service.HistoryService;
-import com.example.art.user.model.User;
+import com.example.art.order.model.Orders;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -15,7 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,19 +37,12 @@ public class HistoryServiceUTest {
 
     @Test
     void whenSaveHistory_thenSuccessSaveHistoryInDatabase() {
-        Design design = mock(Design.class);
-        User user = mock(User.class);
+        Orders orders = mock(Orders.class);
 
-        when(design.getUser()).thenReturn(user);
-
-        historyService.saveInHistory(design);
+        historyService.saveInHistory(orders);
 
         ArgumentCaptor<History> historyArgumentCaptor = ArgumentCaptor.forClass(History.class);
         verify(historyRepository, times(1)).save(historyArgumentCaptor.capture());
-
-        History capturedHistory = historyArgumentCaptor.getValue();
-
-        assertEquals(user, capturedHistory.getUser());
     }
 
     @Test
