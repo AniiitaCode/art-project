@@ -1,5 +1,6 @@
 package com.example.art.web;
 
+import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.UsernameAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,5 +29,14 @@ public class ExceptionAdvice {
         String message = exception.getMessage();
         redirectAttributes.addFlashAttribute("usernameAlreadyExistMessage", message);
         return "redirect:/register";
+    }
+
+    @ExceptionHandler(DateAndTimeAlreadyExistException.class)
+    public ModelAndView handleDateAndTimeAlreadyExist() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("exist-error");
+
+        return modelAndView;
     }
 }
