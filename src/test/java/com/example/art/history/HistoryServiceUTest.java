@@ -4,6 +4,7 @@ import com.example.art.history.model.History;
 import com.example.art.history.repository.HistoryRepository;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
+import com.example.art.user.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -38,8 +39,9 @@ public class HistoryServiceUTest {
     @Test
     void whenSaveHistory_thenSuccessSaveHistoryInDatabase() {
         Orders orders = mock(Orders.class);
+        User user = new User();
 
-        historyService.saveInHistory(orders);
+        historyService.saveInHistory(orders, user);
 
         ArgumentCaptor<History> historyArgumentCaptor = ArgumentCaptor.forClass(History.class);
         verify(historyRepository, times(1)).save(historyArgumentCaptor.capture());

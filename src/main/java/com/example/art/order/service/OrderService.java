@@ -1,6 +1,7 @@
 package com.example.art.order.service;
 
 import com.example.art.design.model.*;
+import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
@@ -39,7 +40,7 @@ public class OrderService {
                 orderRepository.findBySavedDateAndSavedHour(orderRequest.getSavedDate(), orderRequest.getSavedHour());
 
         if (isSaved.isPresent()) {
-            throw new DomainException("This date and time are already booked!");
+            throw new DateAndTimeAlreadyExistException("This date and time are already booked!");
         }
 
         Orders orders = Orders.builder()
@@ -48,8 +49,9 @@ public class OrderService {
                 .design(design)
                 .build();
 
-        historyService.saveInHistory(orders);
+
         orderRepository.save(orders);
+        historyService.saveInHistory(orders, design.getUser());
     }
 
     public List<Orders> getAllOrders() {

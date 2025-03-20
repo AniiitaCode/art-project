@@ -3,6 +3,7 @@ package com.example.art.history.service;
 import com.example.art.history.model.History;
 import com.example.art.history.repository.HistoryRepository;
 import com.example.art.order.model.Orders;
+import com.example.art.user.model.User;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,13 @@ public class HistoryService {
         historyRepository.deleteAll();
     }
 
-    public void saveInHistory(Orders orders) {
+    public void saveInHistory(Orders orders,
+                              User user) {
+
+
         History history = History.builder()
                 .addedOn(LocalDate.now())
+                .user(user)
                 .build();
 
         historyRepository.save(history);
