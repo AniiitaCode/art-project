@@ -4,7 +4,9 @@ import com.example.art.design.model.ConstructionDesign;
 import com.example.art.design.model.DecorationPebbles;
 import com.example.art.design.model.DecorationPicture;
 import com.example.art.design.model.Design;
+import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
+import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.order.service.OrderService;
@@ -28,6 +30,9 @@ public class OrderServiceUTest {
 
     @Mock
     private OrderRepository orderRepository;
+
+    @Mock
+    private HistoryService historyService;
 
     @InjectMocks
     private OrderService orderService;
@@ -128,8 +133,8 @@ public class OrderServiceUTest {
         when(orderRepository.findBySavedDateAndSavedHour(savedDate, savedHour))
                 .thenReturn(isSaved);
 
-        DomainException exception =
-                assertThrows(DomainException.class, () -> {
+        DateAndTimeAlreadyExistException exception =
+                assertThrows(DateAndTimeAlreadyExistException.class, () -> {
                     orderService.saveOrder(dto, design);
                 });
 
@@ -139,6 +144,7 @@ public class OrderServiceUTest {
     @Test
     void whenSavedOrder_dateAndTimeNotExist() {
         Design design = new Design();
+        Orders orders = new Orders();
 
         LocalDate savedDate = LocalDate.of(2025, 12, 19);
         LocalTime savedHour = LocalTime.of(10, 0);
@@ -152,7 +158,8 @@ public class OrderServiceUTest {
 
         assertDoesNotThrow(() -> {
             orderService.saveOrder(dto, design);
-        });
+            historyService.saveInHistory(orders, design.getUser());
+       });
     }
 
     @Test
