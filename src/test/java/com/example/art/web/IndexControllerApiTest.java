@@ -123,7 +123,4 @@ public class IndexControllerApiTest {
 
         verify(userService, never()).register(any());
     }
-
-
-
 }
