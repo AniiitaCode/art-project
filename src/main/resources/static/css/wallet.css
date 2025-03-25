@@ -4,10 +4,42 @@ body {
     color: #ffffff;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     height: 100vh;
     margin: 0;
     padding-top: 0;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+.wallet-section {
+    width: 45%;
+    max-width: 600px;
+}
+
+
+.history-section {
+    width: 70%;
+    max-width: 600px;
+    overflow-y: auto;
+    padding-left: 20px;
+    margin-left: 20%;
+}
+
+
+main {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
 }
 
 
@@ -27,6 +59,7 @@ h1 {
     color: deeppink;
     margin-bottom: 20px;
 }
+
 
 h1 .badge {
     background-color: pink;
@@ -63,6 +96,11 @@ input.is-invalid, textarea.is-invalid {
 }
 
 
+button[type="submit"]:hover {
+    background-color: deeppink;
+}
+
+
 button[type="submit"] {
     background-color: lightpink;
     color: #ffffff;
@@ -72,10 +110,70 @@ button[type="submit"] {
     border-radius: 5px;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    margin-bottom: 10px;
 }
+
 
 button[type="submit"]:hover {
     background-color: deeppink;
+}
+
+
+form h3 {
+    font-size: 22px;
+    color: deeppink;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.clear-history-form {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+    border: none;
+    background: none;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+
+.clear-button {
+    background-color: lightpink;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+
+.clear-button:hover {
+    background-color: deeppink;
+}
+
+
+form h3.underline-title {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+
+.underline-title {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    text-underline-position: under;
 }
 
 
@@ -89,6 +187,40 @@ hr {
     border: 1px solid #fff;
     margin-bottom: 30px;
 }
+
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+
+table, th, td {
+    border: 1px solid #ffffff;
+}
+
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+
+th {
+    background-color: deeppink;
+}
+
+
+tr:nth-child(even) {
+    background-color: lightpink;
+}
+
+
+tr:hover {
+    background-color: #f1c1c1;
+}
+
 
 .footer {
     position: fixed;

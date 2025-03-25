@@ -20,7 +20,7 @@ public class WalletService {
     public void createWallet(User user) {
 
         Wallet wallet = Wallet.builder()
-                .balance(new BigDecimal("100.00"))
+                .balance(new BigDecimal("20.00"))
                 .currency("BGN")
                 .owner(user)
                 .createdOn(LocalDateTime.now())
@@ -31,5 +31,13 @@ public class WalletService {
 
     public Wallet getWalletByUser(User user) {
         return walletRepository.findByOwner(user);
+    }
+
+    public Wallet addBalance(User user, BigDecimal newSum) {
+        Wallet wallet = getWalletByUser(user);
+        wallet.setBalance(wallet.getBalance().add(newSum));
+
+        walletRepository.save(wallet);
+        return wallet;
     }
 }

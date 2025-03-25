@@ -13,7 +13,8 @@
 <body>
 
 <main>
-
+<div class="container">
+    <div class="wallet-section">
     <form class="mx-auto w-25 bg-blur rounded"
           th:method="POST"
           th:action="@{/wallets}"
@@ -31,8 +32,44 @@
                 <p><strong>Currency:&nbsp;</strong> <span th:text="${wallet.currency}"></span></p>
                 <p><strong>Created date:&nbsp;</strong>
                     <span th:text="${#temporals.format(wallet.createdOn, 'dd-MM-YYYY HH:mm')}"></span></p>
+
             </div>
         </div>
+    </form>
+
+    <form th:action="@{/wallets/deposit}" th:method="POST">
+        <div class="text-center mb-3">
+            <h3 class="underline-title">Select Amount</h3>
+        </div>
+        <button type="submit" name="amount" value="50" class="not-accept-button">Add 50 BGN</button>
+        <button type="submit" name="amount" value="100" class="not-accept-button">Add 100 BGN</button>
+        <button type="submit" name="amount" value="150" class="not-accept-button">Add 150 BGN</button>
+        <button type="submit" name="amount" value="200" class="not-accept-button">Add 200 BGN</button>
+    </form>
+
+    </div>
+    <div class="history-section">
+        <h3 class="underline-title">Transaction History</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${#temporals.format(transaction.transactionDate, 'dd-MM-yyyy HH:mm')}">Date</td>
+                <td th:text="${transaction.amount + ' BGN'}">Amount</td>
+                <td th:text="${transaction.transactionType}">Transaction Type</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <form th:action="@{/wallets/transactions/clear}" method="POST" class="clear-history-form">
+        <button type="submit" class="clear-button">Clear History</button>
     </form>
 </main>
 <div class="footer"><p3>© 2025 Nails Art. All rights reserved.</p3></div>
