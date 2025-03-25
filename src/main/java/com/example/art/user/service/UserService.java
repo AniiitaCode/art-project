@@ -10,6 +10,7 @@ import com.example.art.user.repository.UserRepository;
 import com.example.art.wallet.service.WalletService;
 import com.example.art.web.dto.RegisterRequest;
 import com.example.art.web.dto.UserEditRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,6 +41,7 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
     }
 
+ //   @Transactional
     public void register(RegisterRequest registerRequest) {
         Optional<User> optionalUser =
                 userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
@@ -65,7 +67,9 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         walletService.createWallet(user);
         emailService.savePreference(user.getId(), true, user.getEmail());
-        emailService.sendEmail(user.getId(), "Welcome", "Dear %s, welcome to our website!"
+        emailService.sendEmail(user.getId(),
+                "Welcome", ("Dear %s, welcome to our website! " +
+                        "Congratulations! As a new user, you receive a gift of 20 BGN!")
                 .formatted(user.getFirstName()));
     }
 
