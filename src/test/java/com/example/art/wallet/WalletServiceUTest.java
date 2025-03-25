@@ -72,7 +72,7 @@ public class WalletServiceUTest {
 
         Wallet capturedWallet = walletArgumentCaptor.getValue();
 
-        assertEquals(new BigDecimal("100.00"), capturedWallet.getBalance());
+        assertEquals(new BigDecimal("20.00"), capturedWallet.getBalance());
         assertEquals("BGN", capturedWallet.getCurrency());
         assertEquals(user, capturedWallet.getOwner());
 
