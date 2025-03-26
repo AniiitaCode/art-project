@@ -28,6 +28,10 @@ public class Orders {
     @Column(nullable = false)
     private LocalTime savedHour;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentType paymentType;
+
     private boolean isAccept;
 
     @ManyToOne

@@ -1,6 +1,7 @@
 package com.example.art.web.dto;
 
 import com.example.art.design.model.Design;
+import com.example.art.order.model.PaymentType;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -19,5 +20,8 @@ public class OrderRequest {
 
     @NotNull(message = "Enter time")
     private LocalTime savedHour;
+
+    @NotNull(message = "Enter payment method")
+    private PaymentType paymentType;
 
 }

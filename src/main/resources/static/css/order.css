@@ -1,6 +1,6 @@
 
 body {
-    background-image: linear-gradient(to right, purple, pink);
+    background-image: linear-gradient(to right, black, deeppink);
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
     display: flex;
@@ -19,6 +19,7 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 25px 15px rgba(255, 255, 255, 1);
     width: 100%;
     max-width: 800px;
+    margin-top: -57px;
 }
 
 

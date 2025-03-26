@@ -5,7 +5,9 @@ import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
+import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
+import com.example.art.wallet.service.WalletService;
 import com.example.art.web.dto.OrderRequest;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,14 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final HistoryService historyService;
+    private final WalletService walletService;
 
     public OrderService(OrderRepository orderRepository,
-                        HistoryService historyService) {
+                        HistoryService historyService,
+                        WalletService walletService) {
         this.orderRepository = orderRepository;
         this.historyService = historyService;
+        this.walletService = walletService;
     }
 
     public void saveOrder(OrderRequest orderRequest,
@@ -43,10 +48,17 @@ public class OrderService {
             throw new DateAndTimeAlreadyExistException("This date and time are already booked!");
         }
 
+        if (orderRequest.getPaymentType().equals(PaymentType.WALLET)) {
+            LinkedHashMap<String, BigDecimal> bill = createBill(design);
+
+            walletService.withdrawBalance(design.getUser(), bill.get("TotalPrice"));
+        }
+
         Orders orders = Orders.builder()
                 .savedDate(orderRequest.getSavedDate())
                 .savedHour(orderRequest.getSavedHour())
                 .design(design)
+                .paymentType(orderRequest.getPaymentType())
                 .build();
 
 

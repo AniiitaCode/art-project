@@ -44,14 +44,12 @@
 
                 <label for="bill" id="bill"  class="h4 mb-2">Bill</label>
             <div>
-                <p><strong>Gel Polish (form + color):&nbsp;</strong> <span th:text="${bill.get('GelPolish')}"></span></p>
-                <p><strong th:if="${bill.get('Construction') != 'NO'}">Extension:&nbsp;</strong> <span th:text="${bill.get('Construction')}"></span></p>
-                <p><strong th:if="${bill.get('Pebbles') != 'NONE'}">Pebbles:&nbsp;</strong> <span th:text="${bill.get('Pebbles')}"></span></p>
-                <p><strong th:if="${bill.get('Picture') != 'NONE'}">Picture:&nbsp;</strong> <span th:text="${bill.get('Picture')}"></span></p>
-                <br>
-                <br>
+                <p><strong>Gel Polish (form + color):&nbsp;</strong> <span th:text="${bill.get('GelPolish') + ' BGN'}"></span></p>
+                <p><strong th:if="${bill.get('Construction') != 'NO'}">Extension:&nbsp;</strong> <span th:text="${bill.get('Construction') + ' BGN'}"></span></p>
+                <p><strong th:if="${bill.get('Pebbles') != 'NONE'}">Pebbles:&nbsp;</strong> <span th:text="${bill.get('Pebbles') + ' BGN'}"></span></p>
+                <p><strong th:if="${bill.get('Picture') != 'NONE'}">Picture:&nbsp;</strong> <span th:text="${bill.get('Picture') + ' BGN'}"></span></p>
                 <p><strong style="font-weight: bold; font-size: 24px;">Total Price:&nbsp;</strong>
-                    <span th:text="${bill.get('TotalPrice')}" style="font-weight: bold; font-size: 24px;"></span></p>
+                    <span th:text="${bill.get('TotalPrice') + ' BGN'}" style="font-weight: bold; font-size: 24px;"></span></p>
             </div>
     </form>
 
@@ -76,7 +74,7 @@
                 />
                 <small th:if="${#fields.hasErrors('savedDate')}" th:errors="*{savedDate}" class="invalid-feedback text-danger">Input Date error message</small>
             </div>
-
+            <br>
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
                     <label for="savedHour" class="h4 mb-2">Set time</label>
@@ -91,6 +89,27 @@
                 />
                 <small th:if="${#fields.hasErrors('savedHour')}" th:errors="*{savedHour}" class="invalid-feedback text-danger"></small>
             </div>
+            <br>
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="payment" class="h4 mb-2">Payment</label>
+                </div>
+                <select
+                        class="form-control"
+                        id="payment"
+                        name="payment"
+                        th:field="*{paymentType}"
+                th:errorclass="'is-invalid alert-danger'"
+                >
+                    <option value="" selected>Select Payment Method</option>
+                    <option th:each="method : ${T(com.example.art.order.model.PaymentType).values()}"
+                            th:value="${method}"
+                            th:text="${method}">
+                    </option>
+                </select>
+                <small th:if="${#fields.hasErrors('paymentType')}" th:errors="*{paymentType}" class="invalid-feedback text-danger"></small>
+            </div>
+
 
             <p></p>
             <div class="button-holder d-flex justify-content-center">
