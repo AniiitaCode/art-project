@@ -76,12 +76,14 @@
         </div>
          <div class="story-board">
              <p>
-                 <a th:if="${user.role.name() == 'USER'}" th:href="@{/designs}"><button>CREATE DESIGN</button></a>
+                 <a th:if="${user.role.name() == 'USER'}" th:href="@{/designs}">
+                     <button class="create-button">CREATE DESIGN</button>
+                 </a>
              </p>
 
              <p>
                  <a th:if="${user.role.name() == 'ADMIN'}" th:href="@{/schedule}">
-                     <button class="large-button">My Schedule</button>
+                     <button class="create-button">My Schedule</button>
                  </a>
              </p>
          </div>

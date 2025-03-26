@@ -2,17 +2,21 @@
     width: 15%;
 }
 
+
 h5 {
     margin-bottom: 0;
 }
+
 
 .bg-gray {
     background-color: #e9ecef;
 }
 
+
 .bg-nav {
     background-color: rgba(1, 141, 8, 0);
 }
+
 
 nav {
     position: fixed;
@@ -24,17 +28,19 @@ nav {
     display: flex;
     box-shadow: 2px 2px 8px #b5b9bd;
     z-index: 10;
-
 }
+
 
 nav a {
     color: #acafb2;
 }
 
+
 nav .home {
     padding: 0.5em 1em;
     flex: 1 0 30%;
 }
+
 
 nav .links {
     display: flex;
@@ -45,13 +51,16 @@ nav .links {
     flex: 1 1 70%;
 }
 
+
 nav > .home > a {
     padding-left: 1em;
 }
 
+
 body > nav > div.links > li {
     padding-right: 1em;
 }
+
 
 body {
     margin: 0;
@@ -60,22 +69,25 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-color: black;
-
 }
+
 
 main {
     padding-top: 30px;
 }
+
 
 .home-container {
     display: flex;
     flex-direction: row;
 }
 
+
 .profile-img {
     width: 160px;
     height: 160px;
 }
+
 
 .profile-section {
     border-radius: 12px;
@@ -92,6 +104,7 @@ main {
     z-index: 1;
 }
 
+
 .my-stories-section {
     border-radius: 12px;
     margin: -1em 2em auto;
@@ -105,11 +118,13 @@ main {
     z-index: 1;
 }
 
+
 .profile-info {
     display: flex;
     flex-direction: column;
     font-size: 18px;
 }
+
 
 .profile-info button {
     margin-top: 0.3em;
@@ -125,6 +140,7 @@ main {
     padding-bottom: 0.5em;
     gap: 10px;
 }
+
 
 .left-panel {
     display: flex;
@@ -143,6 +159,7 @@ main {
     border-top: 1px solid #dee2e6
 }
 
+
 .login input, select, textarea {
     border: none;
     margin-left: auto;
@@ -150,13 +167,16 @@ main {
     width: 60%;
 }
 
+
 input, select, textarea {
     border-radius: 3px;
 }
 
+
 .add-offer-form, .login {
     width: 400px;
 }
+
 
 .home-fields {
     border-radius: 6px;
@@ -169,12 +189,14 @@ input, select, textarea {
     height: 580px;
 }
 
+
 ul {
     display: block;
     gap: 5px;
     padding-left: 0;
     margin-bottom: 0;
 }
+
 
 ul li {
     border-radius: 6px;
@@ -183,10 +205,12 @@ ul li {
     list-style-type: none;
 }
 
+
 ul li:hover {
     background-color: #98999a;
     border: white solid 2px;
 }
+
 
 .info-row {
     background-color: #343a40;
@@ -198,12 +222,14 @@ ul li:hover {
     gap: 55px;
 }
 
+
 .my-stories {
     border-radius: 4px;
     padding: 10px;
     color: rgba(207, 230, 243, 0.78);
     background-color: rgba(24, 24, 24, 0.92);
 }
+
 
 .my-stories-first-row {
     color: whitesmoke;
@@ -213,6 +239,7 @@ ul li:hover {
     width: auto;
     font-weight: bold;
 }
+
 
 .large-button {
     font-size: 50px;
@@ -228,9 +255,11 @@ ul li:hover {
     margin-top: -20px;
 }
 
+
 .large-button:hover {
     background-color: #E28B9B;
 }
+
 
 .second-info {
     padding: 0.5em 0.5em 0 0.5em;
@@ -241,6 +270,7 @@ ul li:hover {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 }
+
 
 .second-info section {
     width: 200px;
@@ -253,6 +283,7 @@ ul li:hover {
     transition: all 0.3s ease-in-out;
 }
 
+
 .second-info section:hover {
     margin: 0;
     cursor: pointer;
@@ -261,6 +292,7 @@ ul li:hover {
     white-space: normal;
     overflow: visible;
 }
+
 
 button {
     background-color: rgb(74, 106, 124);
@@ -271,26 +303,31 @@ button {
     cursor: pointer;
 }
 
-.story-board {
-    box-shadow: 0 7px 16px #5ace9a;
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    background-color: rgb(118, 166, 127);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0;
-    color: rgba(207, 230, 243, 0.78);
-    background-color: rgba(24, 24, 24, 0.92);
-    margin-top: 440px;
+
+.create-button {
+    background-color: lightpink;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 20px 15px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px 5px rgba(255, 182, 193, 0.7);
     font-weight: bold;
-    font-size: 21px;
 }
+
+
+.create-button:hover {
+    background-color: deeppink;
+}
+
 
 .single-story {
     display: block;
     margin-bottom: 0;
     align-items: center;
 }
+
 
 .read-details {
     display: flex;
@@ -299,19 +336,23 @@ button {
     justify-content: space-between;
 }
 
+
 button:hover {
     background-color: rgb(39, 63, 77);
 }
 
+
 .primary-text {
     color: rgb(218, 218, 218);
 }
+
 
 footer {
     position: static;
     bottom: 0;
     width: 100%;
 }
+
 
 .img-thumb {
     padding: .25rem;
@@ -320,6 +361,7 @@ footer {
     border-radius: .25rem;
     max-width: 100%;
 }
+
 
 .bg-blur {
     background-color: rgb(0, 0, 0);
@@ -333,10 +375,12 @@ footer {
     text-align: center;
 }
 
+
 .mySticky {
     position: sticky;
     left: 0;
 }
+
 
 .story-info {
     display: flex;
@@ -355,17 +399,19 @@ footer {
     0 -0.07em white;
 }
 
+
 a {
     color: #092550;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+
 a:hover {
     text-shadow: none;
     text-decoration: none;
     color: #d1ddf1;
-
 }
+
 
 .count, .user {
     border-radius: 4px;
@@ -385,6 +431,7 @@ a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+
 .intro-text {
     font-size: 1.2rem;
     line-height: 1.6;
@@ -392,11 +439,13 @@ a:hover {
     color: #d4d4d4;
 }
 
+
 .encounters-list {
     list-style-type: none;
     padding: 0;
     text-align: left;
 }
+
 
 .encounters-list li {
     background: #2c2f33;
@@ -409,15 +458,18 @@ a:hover {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+
 .encounters-list li strong {
     color: #7289da;
 }
+
 
 .encounters-list li:hover {
     background: #40444b;
     transform: translateY(-2px);
     transition: all 0.3s ease-in-out;
 }
+
 
 .footer {
     position: fixed;
