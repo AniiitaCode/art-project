@@ -2,6 +2,7 @@ package com.example.art.web;
 
 import com.example.art.design.model.*;
 import com.example.art.design.service.DesignService;
+import com.example.art.order.model.PaymentType;
 import com.example.art.order.service.OrderService;
 import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
@@ -138,6 +139,7 @@ public class OrderControllerApiTest {
         MockHttpServletRequestBuilder request = post("/orders")
                 .param("savedDate", "2025-12-10")
                 .param("savedHour", "10:00")
+                .param("paymentType", String.valueOf(PaymentType.WALLET))
                 .with(user(authenticationDetails))
                 .with(csrf());
 
