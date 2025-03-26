@@ -5,6 +5,7 @@ import com.example.art.design.repository.DesignRepository;
 import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
 import com.example.art.order.model.Orders;
+import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.order.service.OrderService;
 import com.example.art.web.dto.OrderRequest;
@@ -53,6 +54,7 @@ public class SaveOrderITest {
         orderRequest.setSavedHour(savedHour);
         orderRequest.setSavedDate(savedDate);
         orderRequest.setDesign(design);
+        orderRequest.setPaymentType(PaymentType.IN_SALON);
 
 
         orderService.saveOrder(orderRequest, design);
@@ -110,6 +112,7 @@ public class SaveOrderITest {
         orderRequest.setSavedDate(savedDate);
         orderRequest.setSavedHour(savedHour);
         orderRequest.setDesign(design);
+        orderRequest.setPaymentType(PaymentType.IN_SALON);
 
         orderService.saveOrder(orderRequest, design);
 
@@ -140,6 +143,7 @@ public class SaveOrderITest {
         orderRequest.setSavedDate(savedDate);
         orderRequest.setSavedHour(savedHour);
         orderRequest.setDesign(design);
+        orderRequest.setPaymentType(PaymentType.IN_SALON);
 
         orderService.saveOrder(orderRequest, design);
 
