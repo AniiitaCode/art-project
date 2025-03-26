@@ -42,4 +42,17 @@ public class TransactionService {
     public void clearHistory(User user) {
         transactionRepository.deleteTransactionsByUser(user);
     }
+
+    public void createWithdrawTransaction(User user, Wallet wallet, TransactionType transactionType, BigDecimal totalPrice) {
+
+        Transaction transaction = Transaction.builder()
+                .user(user)
+                .wallet(wallet)
+                .amount(totalPrice)
+                .transactionType(transactionType)
+                .transactionDate(LocalDateTime.now())
+                .build();
+
+        transactionRepository.save(transaction);
+    }
 }
