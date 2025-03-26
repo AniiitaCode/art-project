@@ -11,6 +11,72 @@ body {
 }
 
 
+.image-container {
+    position: relative;
+    display: inline-block;
+    box-shadow: 0 0 15px 5px rgba(255, 182, 193, 0.8);
+}
+
+
+.image-container img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+
+.image-container::before, .image-container::after {
+    content: '★';
+    position: absolute;
+    font-size: 50px;
+    color: gold;
+    animation: sparkle 2s infinite;
+}
+
+
+.image-container::before {
+    top: 10px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+
+.image-container::after {
+    bottom: 10px;
+    right: 10px;
+    animation-delay: 1s;
+}
+
+
+@keyframes sparkle {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+
+@keyframes glowingBackground {
+    0% {
+        background-image: linear-gradient(to right, #000000, #555555);
+    }
+    50% {
+        background-image: linear-gradient(to right, deeppink, black);
+    }
+    100% {
+        background-image: linear-gradient(to right, #000000, #555555);
+    }
+}
+
+
 .logo-container {
     width: 50%;
     display: flex;
@@ -25,16 +91,13 @@ body {
     max-width: 400px;
 }
 
-@keyframes moveBackground {
-    0% { background-position: 0 0; }
-    100% { background-position: 100% 100%; }
-}
 
 body {
-    background: url('static/images/design-create.png') no-repeat;
+    *background: url('static/images/design-create.png') no-repeat;
     background-size: cover;
-    animation: moveBackground 3s linear infinite;
+    background-image: linear-gradient(to right, black, deeppink);
 }
+
 
 main {
     width: 90%;
@@ -43,6 +106,7 @@ main {
     justify-content: center;
     padding: 90px;
     align-items: flex-end;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 10.0);
 }
 
 
@@ -54,6 +118,7 @@ main {
     color: deeppink;
     font-family: "Gill Sans Ultra Bold", 'Arial', sans-serif;
 }
+
 
 .intro-text {
     font-size: 1.2em;
@@ -76,6 +141,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    animation: glowingBackground 2s infinite alternate;
 }
 
 
