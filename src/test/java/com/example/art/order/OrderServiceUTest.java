@@ -1,21 +1,24 @@
 package com.example.art.order;
 
-import com.example.art.design.model.ConstructionDesign;
-import com.example.art.design.model.DecorationPebbles;
-import com.example.art.design.model.DecorationPicture;
-import com.example.art.design.model.Design;
+import com.example.art.design.model.*;
 import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
+import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.order.service.OrderService;
+import com.example.art.user.model.User;
+import com.example.art.wallet.service.WalletService;
 import com.example.art.web.dto.OrderRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -33,6 +36,15 @@ public class OrderServiceUTest {
 
     @Mock
     private HistoryService historyService;
+
+    @Mock
+    private WalletService walletService;
+
+    @Captor
+    private ArgumentCaptor<User> userCaptor;
+
+    @Captor
+    private ArgumentCaptor<BigDecimal> amountCaptor;
 
     @InjectMocks
     private OrderService orderService;
@@ -143,8 +155,15 @@ public class OrderServiceUTest {
 
     @Test
     void whenSavedOrder_dateAndTimeNotExist() {
+        User user = new User();
+
         Design design = new Design();
-        Orders orders = new Orders();
+        design.setForm(FormDesign.ALMOND);
+        design.setConstruction(ConstructionDesign.YES);
+        design.setColor("03");
+        design.setPebbles(DecorationPebbles.DIAMONDS);
+        design.setPicture(DecorationPicture.BEAR);
+        design.setUser(user);
 
         LocalDate savedDate = LocalDate.of(2025, 12, 19);
         LocalTime savedHour = LocalTime.of(10, 0);
@@ -152,15 +171,27 @@ public class OrderServiceUTest {
         OrderRequest dto = new OrderRequest();
         dto.setSavedDate(savedDate);
         dto.setSavedHour(savedHour);
+        dto.setPaymentType(PaymentType.WALLET);
 
         when(orderRepository.findBySavedDateAndSavedHour(savedDate, savedHour))
                 .thenReturn(Optional.empty());
 
+        lenient().doNothing().when(walletService)
+                .withdrawBalance(any(User.class), eq(BigDecimal.valueOf(53.00)));
+
         assertDoesNotThrow(() -> {
             orderService.saveOrder(dto, design);
-            historyService.saveInHistory(orders, design.getUser());
        });
+
+        verify(walletService, times(1))
+                .withdrawBalance(userCaptor.capture(), amountCaptor.capture());
+
+        assertEquals(user, userCaptor.getValue());
+
+        verify(orderRepository, times(1)).save(any(Orders.class));
+        verify(historyService, times(1)).saveInHistory(any(Orders.class), any(User.class));
     }
+
 
     @Test
     void whenSaveOrder_thenSuccessSaveOrderInDatabase(){
