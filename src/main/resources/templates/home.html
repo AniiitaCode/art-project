@@ -86,6 +86,12 @@
                      <button class="create-button">My Schedule</button>
                  </a>
              </p>
+
+             <p>
+                 <a th:if="${user.role.name() == 'ADMIN'}" th:href="@{/balance}">
+                     <button class="create-button">Balance</button>
+                 </a>
+             </p>
          </div>
     </div>
 </main>
