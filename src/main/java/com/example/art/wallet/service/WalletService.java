@@ -1,11 +1,15 @@
 package com.example.art.wallet.service;
 
+import com.example.art.adminBalance.service.AdminBalanceService;
+import com.example.art.adminTransaction.model.TypeTransaction;
+import com.example.art.adminTransaction.service.AdminTransactionService;
 import com.example.art.exception.DomainException;
 import com.example.art.transaction.model.TransactionType;
 import com.example.art.transaction.service.TransactionService;
 import com.example.art.user.model.User;
 import com.example.art.wallet.model.Wallet;
 import com.example.art.wallet.repository.WalletRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,11 +20,17 @@ public class WalletService {
 
     private final WalletRepository walletRepository;
     private final TransactionService transactionService;
+    private final AdminBalanceService adminBalanceService;
+    private final AdminTransactionService adminTransactionService;
 
     public WalletService(WalletRepository walletRepository,
-                         TransactionService transactionService) {
+                         TransactionService transactionService,
+                         AdminBalanceService adminBalanceService,
+                         AdminTransactionService adminTransactionService) {
         this.walletRepository = walletRepository;
         this.transactionService = transactionService;
+        this.adminBalanceService = adminBalanceService;
+        this.adminTransactionService = adminTransactionService;
     }
 
     public void createWallet(User user) {
@@ -47,6 +57,7 @@ public class WalletService {
         return wallet;
     }
 
+    @Transactional
     public void withdrawBalance(User user, BigDecimal totalPrice) {
         Wallet wallet = getWalletByUser(user);
         int result = wallet.getBalance().compareTo(totalPrice);
@@ -57,6 +68,9 @@ public class WalletService {
 
         transactionService.createWithdrawTransaction(user, wallet, TransactionType.WITHDRAW, totalPrice);
         wallet.setBalance(wallet.getBalance().subtract(totalPrice));
+        adminBalanceService.addBalance(totalPrice);
+        adminTransactionService.createAddTransaction(TypeTransaction.ADD, totalPrice, user.getUsername());
+
 
         walletRepository.save(wallet);
     }
