@@ -66,7 +66,7 @@ public class WalletController {
         return "redirect:/wallets";
     }
 
-    @PostMapping("/transactions/clear")
+    @DeleteMapping("/transactions/clear")
     public String clearTransactionHistory(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
         UUID userId = authenticationDetails.getUserId();
         User user = userService.getById(userId);

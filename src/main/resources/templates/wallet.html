@@ -68,7 +68,7 @@
         </table>
     </div>
 </div>
-    <form th:action="@{/wallets/transactions/clear}" method="POST" class="clear-history-form">
+    <form th:action="@{/wallets/transactions/clear}" th:method="DELETE" class="clear-history-form">
         <button type="submit" class="clear-button">Clear History</button>
     </form>
 </main>
