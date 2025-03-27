@@ -54,7 +54,7 @@ public class OrderController {
 
     @PostMapping
     public ModelAndView orderPageConfirm(@Valid OrderRequest orderRequest,
-                                   BindingResult bindingResult,
+                                         BindingResult bindingResult,
                                          @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
 
         ModelAndView modelAndView = new ModelAndView();

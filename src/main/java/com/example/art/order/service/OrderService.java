@@ -2,6 +2,7 @@ package com.example.art.order.service;
 
 import com.example.art.design.model.*;
 import com.example.art.exception.DateAndTimeAlreadyExistException;
+import com.example.art.exception.DateMustBeInFutureException;
 import com.example.art.exception.DomainException;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
@@ -9,9 +10,11 @@ import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
 import com.example.art.wallet.service.WalletService;
 import com.example.art.web.dto.OrderRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -31,6 +34,7 @@ public class OrderService {
         this.walletService = walletService;
     }
 
+    @Transactional
     public void saveOrder(OrderRequest orderRequest,
                           Design design) {
 
@@ -39,6 +43,11 @@ public class OrderService {
 
         if (orderRequest.getSavedHour().isBefore(startTime) || orderRequest.getSavedHour().isAfter(endTime)) {
             throw new DomainException("Time must be between 10:00 and 18:00!");
+        }
+
+
+        if (orderRequest.getSavedDate().isBefore(LocalDate.now())) {
+            throw new DateMustBeInFutureException("The order date must be in the future.");
         }
 
         Optional<Orders> isSaved =
@@ -50,6 +59,7 @@ public class OrderService {
 
         if (orderRequest.getPaymentType().equals(PaymentType.WALLET)) {
             LinkedHashMap<String, BigDecimal> bill = createBill(design);
+
 
             walletService.withdrawBalance(design.getUser(), bill.get("TotalPrice"));
         }
