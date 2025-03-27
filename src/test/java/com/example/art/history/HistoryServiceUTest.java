@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -51,6 +52,9 @@ public class HistoryServiceUTest {
     void whenDeleteAllHistory_thenEmptyHistoryRepository() {
         historyService.deleteAllHistory();
 
-        verify(historyRepository, times(1)).deleteAll();
+        ArgumentCaptor<LocalDate> startDateCaptor = ArgumentCaptor.forClass(LocalDate.class);
+        ArgumentCaptor<LocalDate> endDateCaptor = ArgumentCaptor.forClass(LocalDate.class);
+
+        verify(historyRepository, times(1)).deleteByAddedOnBetween(startDateCaptor.capture(), endDateCaptor.capture());
     }
 }
