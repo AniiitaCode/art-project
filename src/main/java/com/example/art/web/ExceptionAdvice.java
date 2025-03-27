@@ -1,6 +1,7 @@
 package com.example.art.web;
 
 import com.example.art.exception.DateAndTimeAlreadyExistException;
+import com.example.art.exception.DateMustBeInFutureException;
 import com.example.art.exception.UsernameAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,6 +37,15 @@ public class ExceptionAdvice {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("exist-error");
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(DateMustBeInFutureException.class)
+    public ModelAndView handleDateMustBeInFuture() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error-bad-request");
 
         return modelAndView;
     }
