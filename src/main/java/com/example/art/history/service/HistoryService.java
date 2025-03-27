@@ -25,7 +25,10 @@ public class HistoryService {
 
     @Scheduled(fixedDelay = 31622400000L)
     public void deleteAllHistory() {
-        historyRepository.deleteAll();
+        LocalDate startDate = LocalDate.of(2025, 1, 1);
+        LocalDate endDate = LocalDate.of(2026, 12, 31);
+
+        historyRepository.deleteByAddedOnBetween(startDate, endDate);
     }
 
     public void saveInHistory(Orders orders,
