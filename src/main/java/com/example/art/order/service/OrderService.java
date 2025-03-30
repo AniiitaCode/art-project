@@ -68,6 +68,7 @@ public class OrderService {
                 .savedDate(orderRequest.getSavedDate())
                 .savedHour(orderRequest.getSavedHour())
                 .design(design)
+                .user(design.getUser())
                 .paymentType(orderRequest.getPaymentType())
                 .build();
 
