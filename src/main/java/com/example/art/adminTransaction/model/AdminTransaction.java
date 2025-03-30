@@ -1,6 +1,5 @@
 package com.example.art.adminTransaction.model;
 
-import com.example.art.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
