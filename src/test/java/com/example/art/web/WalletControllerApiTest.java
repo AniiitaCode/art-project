@@ -81,7 +81,7 @@ public class WalletControllerApiTest {
 
         when(userService.getById(userId)).thenReturn(user);
         when(walletService.getWalletByUser(user)).thenReturn(wallet);
-        when(transactionService.getByWallet(wallet)).thenReturn(transactions);
+        when(transactionService.getByUserId(userId)).thenReturn(transactions);
 
 
         MockHttpServletRequestBuilder request = get("/wallets")
@@ -98,7 +98,7 @@ public class WalletControllerApiTest {
 
         verify(userService).getById(userId);
         verify(walletService).getWalletByUser(user);
-        verify(transactionService).getByWallet(wallet);
+        verify(transactionService).getByUserId(userId);
     }
 }
 
