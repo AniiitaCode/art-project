@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TransactionService {
@@ -34,8 +35,8 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    public List<Transaction> getByWallet(Wallet wallet) {
-        return transactionRepository.findByWallet(wallet);
+    public List<Transaction> getByUserId(UUID userId) {
+        return transactionRepository.findByUserIdOrderByTransactionDateDesc(userId);
     }
 
     @Transactional
