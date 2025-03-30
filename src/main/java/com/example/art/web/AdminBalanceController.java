@@ -3,6 +3,7 @@ package com.example.art.web;
 import com.example.art.adminBalance.service.AdminBalanceService;
 import com.example.art.adminTransaction.model.AdminTransaction;
 import com.example.art.adminTransaction.service.AdminTransactionService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class AdminBalanceController {
         this.adminTransactionService = adminTransactionService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ModelAndView getBalancePage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -38,6 +40,7 @@ public class AdminBalanceController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/transactions/clear")
     public String clearTransactionHistory() {
         List<AdminTransaction> transactions = adminTransactionService.getAllTransaction();
