@@ -39,7 +39,7 @@ public class WalletController {
         UUID userId = authenticationDetails.getUserId();
         User user = userService.getById(userId);
         Wallet wallet = walletService.getWalletByUser(user);
-        List<Transaction> transactions = transactionService.getByWallet(wallet);
+        List<Transaction> transactions = transactionService.getByUserId(userId);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("wallet");
@@ -61,7 +61,8 @@ public class WalletController {
         transactionService.createTransaction(user, wallet, amount, TransactionType.ADD);
 
         redirectAttributes.addFlashAttribute("wallet", wallet);
-        redirectAttributes.addFlashAttribute("transactions", transactionService.getByWallet(wallet));
+        redirectAttributes.addFlashAttribute("transactions",
+                transactionService.getByUserId(userId));
 
         return "redirect:/wallets";
     }
