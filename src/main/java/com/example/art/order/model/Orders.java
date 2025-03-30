@@ -3,6 +3,7 @@ package com.example.art.order.model;
 import com.example.art.design.model.Design;
 import com.example.art.history.model.History;
 import com.example.art.schedule.model.Schedule;
+import com.example.art.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,9 @@ public class Orders {
     private PaymentType paymentType;
 
     private boolean isAccept;
+
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private Design design;
