@@ -17,15 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WalletController.class)
@@ -99,6 +96,80 @@ public class WalletControllerApiTest {
         verify(userService).getById(userId);
         verify(walletService).getWalletByUser(user);
         verify(transactionService).getByUserId(userId);
+    }
+
+    @Test
+    void deleteTransaction() throws Exception {
+        UUID userId = UUID.randomUUID();
+        AuthenticationDetails authenticationDetails =
+                new AuthenticationDetails(userId, "user", "123456", UserRole.USER);
+
+        User user = User.builder()
+                .id(authenticationDetails.getUserId())
+                .firstName("Ani")
+                .email("ani@abv.bg")
+                .username(authenticationDetails.getUsername())
+                .password(authenticationDetails.getPassword())
+                .role(authenticationDetails.getRole())
+                .build();
+
+        when(userService.getById(userId)).thenReturn(user);
+
+        MockHttpServletRequestBuilder request = delete("/wallets/transactions/clear")
+                .with(user(authenticationDetails))
+                .with(csrf());
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/wallets"));
+
+        verify(userService, times(1)).getById(userId);
+        verify(transactionService, times(1)).clearHistory(user);
+    }
+
+    @Test
+    void postAddMoney() throws Exception {
+        UUID userId = UUID.randomUUID();
+        AuthenticationDetails authenticationDetails =
+                new AuthenticationDetails(userId, "user", "123456", UserRole.USER);
+
+        User user = User.builder()
+                .id(authenticationDetails.getUserId())
+                .firstName("Ani")
+                .email("ani@abv.bg")
+                .username(authenticationDetails.getUsername())
+                .password(authenticationDetails.getPassword())
+                .role(authenticationDetails.getRole())
+                .build();
+
+        BigDecimal amount = new BigDecimal("50.00");
+
+        Wallet wallet = Wallet.builder()
+                .currency("BGN")
+                .balance(new BigDecimal("50.00"))
+                .owner(user)
+                .build();
+
+        when(userService.getById(userId)).thenReturn(user);
+        when(walletService.addBalance(user, amount)).thenReturn(wallet);
+        when(transactionService.getByUserId(userId)).thenReturn(new ArrayList<>());
+
+        MockHttpServletRequestBuilder request = post("/wallets/deposit")
+                .with(user(authenticationDetails))
+                .with(csrf())
+                .param("amount", "50.00");
+
+        mockMvc.perform(request)
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/wallets"))
+                .andExpect(flash().attributeExists("wallet"))
+                .andExpect(flash().attribute("wallet", wallet))
+                .andExpect(flash().attributeExists("transactions"))
+                .andExpect(flash().attribute("transactions", new ArrayList<>()));
+
+        verify(userService, times(1)).getById(userId);
+        verify(walletService, times(1)).addBalance(user, amount);
+        verify(transactionService, times(1)).getByUserId(userId);
     }
 }
 
