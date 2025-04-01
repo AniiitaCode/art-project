@@ -4,7 +4,7 @@ import com.example.art.adminBalance.model.Balance;
 import com.example.art.adminBalance.repository.AdminBalanceRepository;
 import com.example.art.adminTransaction.model.TypeTransaction;
 import com.example.art.adminTransaction.service.AdminTransactionService;
-import com.example.art.exception.DomainException;
+import com.example.art.exception.InsufficientBalanceException;
 import com.example.art.user.model.User;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,7 @@ public class AdminBalanceService {
         int result = getBalance().compareTo(amount);
 
         if (result < 0) {
-            throw new DomainException("Your balance is insufficient.");
+            throw new InsufficientBalanceException("Your balance is insufficient.");
         }
 
         Balance adminBalance = adminBalanceRepository.findFirst();
