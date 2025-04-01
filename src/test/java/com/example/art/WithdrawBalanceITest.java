@@ -5,7 +5,7 @@ import com.example.art.adminBalance.repository.AdminBalanceRepository;
 import com.example.art.adminBalance.service.AdminBalanceService;
 import com.example.art.adminTransaction.model.TypeTransaction;
 import com.example.art.adminTransaction.service.AdminTransactionService;
-import com.example.art.exception.DomainException;
+import com.example.art.exception.InsufficientBalanceException;
 import com.example.art.user.model.User;
 import com.example.art.user.model.UserRole;
 import org.junit.jupiter.api.Test;
@@ -79,7 +79,7 @@ public class WithdrawBalanceITest {
 
         when(adminBalanceRepository.findFirst()).thenReturn(balance);
 
-        DomainException exception = assertThrows(DomainException.class, () -> {
+        InsufficientBalanceException exception = assertThrows(InsufficientBalanceException.class, () -> {
             adminBalanceService.withdrawBalance(user, amount);
         });
 
