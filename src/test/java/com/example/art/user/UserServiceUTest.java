@@ -2,6 +2,7 @@ package com.example.art.user;
 
 import com.example.art.email.service.EmailService;
 import com.example.art.exception.DomainException;
+import com.example.art.exception.NotFoundException;
 import com.example.art.exception.UsernameAlreadyExistException;
 import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
@@ -59,8 +60,8 @@ public class UserServiceUTest {
         UUID userId = UUID.randomUUID();
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
-       DomainException exception =
-               assertThrows(DomainException.class, () -> userService.switchRole(userId));
+       NotFoundException exception =
+               assertThrows(NotFoundException.class, () -> userService.switchRole(userId));
 
        assertEquals("User with id [%s] does not exist.".formatted(userId),
                exception.getMessage());
@@ -298,8 +299,8 @@ public class UserServiceUTest {
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
-        DomainException exception =
-                assertThrows(DomainException.class, () -> userService.getById(userId));
+        NotFoundException exception =
+                assertThrows(NotFoundException.class, () -> userService.getById(userId));
 
         assertEquals("User with id [%s] does not exist.".formatted(userId),
                 exception.getMessage());
