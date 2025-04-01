@@ -3,6 +3,7 @@ package com.example.art.order;
 import com.example.art.design.model.*;
 import com.example.art.exception.DateAndTimeAlreadyExistException;
 import com.example.art.exception.DomainException;
+import com.example.art.exception.NotFoundException;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
 import com.example.art.order.model.PaymentType;
@@ -243,7 +244,7 @@ public class OrderServiceUTest {
 
         when(orderRepository.findById(orderId)).thenReturn(Optional.empty());
 
-        DomainException exception = assertThrows(DomainException.class, () -> {
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
             orderService.getOrderById(orderId);
         });
 
