@@ -1,8 +1,6 @@
 package com.example.art.web;
 
-import com.example.art.exception.DateAndTimeAlreadyExistException;
-import com.example.art.exception.DateMustBeInFutureException;
-import com.example.art.exception.UsernameAlreadyExistException;
+import com.example.art.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,6 +44,33 @@ public class ExceptionAdvice {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error-bad-request");
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(InvalidTimeException.class)
+    public ModelAndView handleInvalidTime() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error-invalid-time");
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ModelAndView handleInsufficientBalance() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error-insufficient-balance");
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error-not-found");
 
         return modelAndView;
     }
