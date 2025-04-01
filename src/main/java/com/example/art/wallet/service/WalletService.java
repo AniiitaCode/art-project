@@ -3,7 +3,7 @@ package com.example.art.wallet.service;
 import com.example.art.adminBalance.service.AdminBalanceService;
 import com.example.art.adminTransaction.model.TypeTransaction;
 import com.example.art.adminTransaction.service.AdminTransactionService;
-import com.example.art.exception.DomainException;
+import com.example.art.exception.InsufficientBalanceException;
 import com.example.art.transaction.model.TransactionType;
 import com.example.art.transaction.service.TransactionService;
 import com.example.art.user.model.User;
@@ -63,7 +63,7 @@ public class WalletService {
         int result = wallet.getBalance().compareTo(totalPrice);
 
         if (result < 0) {
-            throw new DomainException("Your balance is insufficient.");
+            throw new InsufficientBalanceException("Your balance is insufficient.");
         }
 
         transactionService.createWithdrawTransaction(user, wallet, TransactionType.WITHDRAW, totalPrice);

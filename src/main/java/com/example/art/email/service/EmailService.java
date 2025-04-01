@@ -4,6 +4,7 @@ import com.example.art.email.client.EmailClient;
 import com.example.art.email.client.dto.EmailPreference;
 import com.example.art.email.client.dto.EmailRequest;
 import com.example.art.email.client.dto.UpsertPreference;
+import com.example.art.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class EmailService {
                 emailClient.getEmailPreference(userId);
 
         if (!response.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("Email preference not found.");
+            throw new NotFoundException("Email preference not found.");
         }
 
         return response.getBody();

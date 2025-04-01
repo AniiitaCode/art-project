@@ -2,6 +2,7 @@ package com.example.art.user.service;
 
 import com.example.art.email.service.EmailService;
 import com.example.art.exception.DomainException;
+import com.example.art.exception.NotFoundException;
 import com.example.art.exception.UsernameAlreadyExistException;
 import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.model.User;
@@ -75,7 +76,7 @@ public class UserService implements UserDetailsService {
 
     public User getById(UUID userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new DomainException("User with id [%s] does not exist."
+                .orElseThrow(() -> new NotFoundException("User with id [%s] does not exist."
                         .formatted(userId)));
     }
 
@@ -96,7 +97,7 @@ public class UserService implements UserDetailsService {
         User userToUpdate = getById(id);
 
         if (userToUpdate == null) {
-            throw new DomainException("User with id [%s] does not exist.".formatted(id));
+            throw new NotFoundException("User with id [%s] does not exist.".formatted(id));
         }
 
         if (userToUpdate.getRole() == UserRole.ADMIN) {

@@ -1,9 +1,7 @@
 package com.example.art.order.service;
 
 import com.example.art.design.model.*;
-import com.example.art.exception.DateAndTimeAlreadyExistException;
-import com.example.art.exception.DateMustBeInFutureException;
-import com.example.art.exception.DomainException;
+import com.example.art.exception.*;
 import com.example.art.history.service.HistoryService;
 import com.example.art.order.model.Orders;
 import com.example.art.order.model.PaymentType;
@@ -42,7 +40,7 @@ public class OrderService {
         LocalTime endTime = LocalTime.of(18, 0);
 
         if (orderRequest.getSavedHour().isBefore(startTime) || orderRequest.getSavedHour().isAfter(endTime)) {
-            throw new DomainException("Time must be between 10:00 and 18:00!");
+            throw new InvalidTimeException("Time must be between 10:00 and 18:00!");
         }
 
 
@@ -88,7 +86,7 @@ public class OrderService {
 
     public Orders getOrderById(UUID orderId) {
         return orderRepository.findById(orderId)
-                .orElseThrow(() -> new DomainException("Order with id [%s] does not exist."
+                .orElseThrow(() -> new NotFoundException("Order with id [%s] does not exist."
                         .formatted(orderId)));
     }
 
