@@ -3,7 +3,7 @@ package com.example.art;
 import com.example.art.design.model.*;
 import com.example.art.design.repository.DesignRepository;
 import com.example.art.exception.DateAndTimeAlreadyExistException;
-import com.example.art.exception.DomainException;
+import com.example.art.exception.InvalidTimeException;
 import com.example.art.order.model.Orders;
 import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
@@ -85,7 +85,7 @@ public class SaveOrderITest {
         orderRequest.setSavedHour(savedHour);
         orderRequest.setSavedDate(savedDate);
 
-        DomainException message = assertThrows(DomainException.class, () -> {
+        InvalidTimeException message = assertThrows(InvalidTimeException.class, () -> {
             orderService.saveOrder(orderRequest, design);
         });
 
