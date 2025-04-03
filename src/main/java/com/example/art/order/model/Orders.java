@@ -33,7 +33,9 @@ public class Orders {
     @Column(nullable = false)
     private PaymentType paymentType;
 
-    private boolean isAccept;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ManyToOne
     private User user;

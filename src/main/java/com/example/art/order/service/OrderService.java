@@ -3,6 +3,7 @@ package com.example.art.order.service;
 import com.example.art.design.model.*;
 import com.example.art.exception.*;
 import com.example.art.history.service.HistoryService;
+import com.example.art.order.model.OrderStatus;
 import com.example.art.order.model.Orders;
 import com.example.art.order.model.PaymentType;
 import com.example.art.order.repository.OrderRepository;
@@ -65,6 +66,7 @@ public class OrderService {
         Orders orders = Orders.builder()
                 .savedDate(orderRequest.getSavedDate())
                 .savedHour(orderRequest.getSavedHour())
+                .status(OrderStatus.PENDING)
                 .design(design)
                 .user(design.getUser())
                 .paymentType(orderRequest.getPaymentType())
@@ -78,6 +80,7 @@ public class OrderService {
     public List<Orders> getAllOrders() {
         return orderRepository.findAll()
                 .stream()
+                .filter(order -> order.getStatus() != OrderStatus.UNACCEPTED)
                 .sorted(Comparator.comparing(Orders::getSavedDate)
                         .thenComparing(Orders::getSavedHour))
                 .toList();
