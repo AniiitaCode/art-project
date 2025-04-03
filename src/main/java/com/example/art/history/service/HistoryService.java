@@ -34,12 +34,23 @@ public class HistoryService {
     public void saveInHistory(Orders orders,
                               User user) {
 
-
         History history = History.builder()
                 .addedOn(LocalDate.now())
+                .status(orders.getStatus())
                 .user(user)
                 .build();
 
         historyRepository.save(history);
     }
-}
+
+    public void updateStatusHistory(Orders order) {
+        History history = History
+                .builder()
+                .user(order.getUser())
+                .status(order.getStatus())
+                .addedOn(LocalDate.now())
+                .build();
+
+            historyRepository.save(history);
+        }
+    }
