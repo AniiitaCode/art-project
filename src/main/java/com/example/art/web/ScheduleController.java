@@ -65,7 +65,7 @@ public class ScheduleController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
-    @DeleteMapping("/{orderId}")
+    @PostMapping("/{orderId}")
     public String removeOrder(@PathVariable UUID orderId) {
 
         Orders order = orderService.getOrderById(orderId);

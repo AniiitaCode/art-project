@@ -31,10 +31,10 @@
                     <p></p>
                     <span class="p-3">Saved hour: <span th:text="${order.savedHour}"></span></span>
                     <form th:action="@{'/schedule/' + ${order.id} + '/confirm'}" th:method="POST">
-                    <button type="submit" th:if="${!order.isAccept()}" class="accept-button">Accept</button>
+                    <button type="submit" th:if="${order.status.name() == 'PENDING'}" class="accept-button">Accept</button>
                     </form>
-                    <form th:action="@{'/schedule/' + ${order.id}}" th:method="DELETE">
-                        <button type="submit" th:if="${!order.isAccept()}" class="not-accept-button">Not Accept</button>
+                    <form th:action="@{'/schedule/' + ${order.id}}" th:method="POST">
+                        <button type="submit" th:if="${order.status.name() == 'PENDING'}" class="not-accept-button">Not Accept</button>
                     </form>
                 </div>
             </div>
