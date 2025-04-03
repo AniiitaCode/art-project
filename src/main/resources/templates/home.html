@@ -65,7 +65,12 @@
                             </div>
                             <div class="buttons">
                                 <form th:action="@{'/histories/' + ${history.id}}" th:method="DELETE">
-                                    <button>Remove</button>
+                                         <span th:if="${history.status.name() == 'PENDING'}">🕒</span>
+                                         <span th:if="${history.status.name() == 'ACCEPTED'}">✔️</span>
+                                         <span th:if="${history.status.name() == 'UNACCEPTED'}">❌</span>
+                                    <button>
+                                        Remove
+                                    </button>
                                 </form>
                             </div>
                         </div>
