@@ -130,7 +130,7 @@ public class ScheduleControllerApiTest {
         when(user.getWallet()).thenReturn(wallet);
 
 
-        MockHttpServletRequestBuilder request = delete("/schedule/{orderId}", orderId)
+        MockHttpServletRequestBuilder request = post("/schedule/{orderId}", orderId)
                 .with(user(authenticationDetails))
                 .with(csrf());
 
