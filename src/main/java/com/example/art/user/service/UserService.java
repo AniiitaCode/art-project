@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -42,7 +41,7 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
     }
 
-    @Transactional
+ //   @Transactional
     public void register(RegisterRequest registerRequest) {
         Optional<User> optionalUser =
                 userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
@@ -118,9 +117,6 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll()
-                .stream()
-                .filter(user -> user.getRole().equals(UserRole.USER))
-                .collect(Collectors.toList());
+        return userRepository.findAll();
     }
 }
