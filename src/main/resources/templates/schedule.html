@@ -25,8 +25,6 @@
                     <img class="mr-2" th:src="@{/images/profile-schedule.png}" alt="Profile Schedule"
                          width="50px" height="50px">
                     <p></p>
-                    <span class="p-3">Order ID: <span th:text="${order.getId()}"></span></span>
-                    <p></p>
                     <span class="p-3">Saved date: <span th:text="${#temporals.format(order.savedDate, 'dd-MM-YYYY')}"></span></span>
                     <p></p>
                     <span class="p-3">Saved hour: <span th:text="${order.savedHour}"></span></span>
