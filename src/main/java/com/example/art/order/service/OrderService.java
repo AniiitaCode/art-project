@@ -45,7 +45,7 @@ public class OrderService {
         }
 
 
-        if (orderRequest.getSavedDate().isBefore(LocalDate.now())) {
+        if (orderRequest.getSavedDate().isBefore(LocalDate.now().plusDays(1))) {
             throw new DateMustBeInFutureException("The order date must be in the future.");
         }
 
