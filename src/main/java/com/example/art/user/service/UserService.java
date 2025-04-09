@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
     }
 
- //   @Transactional
+    @Transactional
     public void register(RegisterRequest registerRequest) {
         Optional<User> optionalUser =
                 userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
