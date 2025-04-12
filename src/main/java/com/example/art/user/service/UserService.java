@@ -1,7 +1,6 @@
 package com.example.art.user.service;
 
 import com.example.art.email.service.EmailService;
-import com.example.art.exception.DomainException;
 import com.example.art.exception.NotFoundException;
 import com.example.art.exception.UsernameAlreadyExistException;
 import com.example.art.security.AuthenticationDetails;
@@ -41,7 +40,7 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
     }
 
- //   @Transactional
+    @Transactional
     public void register(RegisterRequest registerRequest) {
         Optional<User> optionalUser =
                 userRepository.findByUsernameOrEmail(registerRequest.getUsername(), registerRequest.getEmail());
@@ -100,10 +99,10 @@ public class UserService implements UserDetailsService {
         }
 
         if (userToUpdate.getRole() == UserRole.ADMIN) {
-            throw new DomainException("This user is already an admin!");
+            userToUpdate.setRole(UserRole.USER);
+        }  else {
+            userToUpdate.setRole(UserRole.ADMIN);
         }
-
-        userToUpdate.setRole(UserRole.ADMIN);
 
         userRepository.save(userToUpdate);
     }
