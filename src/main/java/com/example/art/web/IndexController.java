@@ -1,9 +1,11 @@
 package com.example.art.web;
 
+import com.example.art.security.AuthenticationDetails;
 import com.example.art.user.service.UserService;
 import com.example.art.web.dto.LoginRequest;
 import com.example.art.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +23,22 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public ModelAndView indexPage() {
+    public ModelAndView indexPage(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+
+        if (authenticationDetails != null) {
+            return new ModelAndView("redirect:/home");
+        }
+
         return new ModelAndView("index");
     }
 
     @GetMapping("/register")
-    public ModelAndView registerPage() {
+    public ModelAndView registerPage(@AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+
+        if (authenticationDetails != null) {
+            return new ModelAndView("redirect:/home");
+        }
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
         modelAndView.addObject("registerRequest", new RegisterRequest());
@@ -48,7 +60,13 @@ public class IndexController {
     }
 
     @GetMapping("/login")
-    public ModelAndView loginPage(@RequestParam(value = "error", required = false)String errorParam) {
+    public ModelAndView loginPage(@RequestParam(value = "error", required = false)String errorParam,
+                                  @AuthenticationPrincipal AuthenticationDetails authenticationDetails) {
+
+        if (authenticationDetails != null) {
+            return new ModelAndView("redirect:/home");
+        }
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         modelAndView.addObject("loginRequest", new LoginRequest());
